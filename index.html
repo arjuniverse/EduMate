@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarBot - Smart Auto Assistant (Retro Blocks Theme)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Colors & Global Styling (Theme 3: Retro Gradient & Clean Blocks) --- */
+        :root {
+            --bg-gradient-start: #1A0D30; 
+            --bg-gradient-end: #3B1C5A;   
+            --primary-purple: #CC66FF;    
+            --secondary-blue: #00CCFF;    
+            --text-light: #F0F0F0;
+            --card-bg: #281840;
+            --border-radius-sharp: 0px;
+        }
+
+        /* Basic Reset */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        body { 
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            color: var(--text-light); 
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+            position: relative; 
+        }
+
+        /* Headings & Sections */
+        h1, h2, h3 { font-weight: 700; }
+        h2 { 
+            color: var(--primary-purple); 
+            text-align: center; 
+            margin-bottom: 40px; 
+            padding-top: 60px;
+        }
+        section { padding: 40px 0; }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background: rgba(26, 13, 48, 0.95);
+            border-bottom: 3px solid var(--secondary-blue); 
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--secondary-blue);
+        }
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary-purple);
+        }
+        .nav-item.active {
+            border-bottom: 3px solid var(--primary-purple);
+            padding-bottom: 5px;
+            color: var(--primary-purple);
+        }
+        .nav-item.highlight {
+            border: 2px solid var(--primary-purple);
+            padding: 8px 15px;
+            border-radius: var(--border-radius-sharp);
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .nav-item.highlight:hover {
+            background-color: var(--primary-purple);
+            color: var(--bg-gradient-start);
+        }
+        .login-btn {
+            background-color: transparent;
+            border: 2px solid var(--secondary-blue);
+            color: var(--secondary-blue);
+            padding: 8px 15px;
+            border-radius: var(--border-radius-sharp);
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .login-btn:hover {
+            background-color: var(--secondary-blue);
+            color: var(--bg-gradient-start);
+        }
+
+        /* --- Hero Section (Video Background Styling) --- */
+        .hero-section {
+            position: relative;
+            height: 70vh;
+            overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        /* Video Element Styling */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            z-index: 1; 
+        }
+
+        /* Video Overlay (Darkening/Coloring effect) */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 13, 48, 0.6); 
+            z-index: 2; 
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3; 
+        }
+        .hero-content h1 {
+            font-size: 5em;
+            color: var(--text-light);
+            text-shadow: 0 0 15px var(--secondary-blue); 
+        }
+        .hero-content h2 {
+            font-size: 1.5em;
+            color: var(--primary-purple);
+            margin-bottom: 30px;
+            padding-top: 0;
+        }
+        .hero-buttons button { margin: 0 10px; }
+
+        /* --- Buttons (Sharp Corners & Hover Effects) --- */
+        .btn {
+            border: none;
+            padding: 12px 25px;
+            border-radius: var(--border-radius-sharp);
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+        }
+        .primary-btn {
+            background-color: var(--primary-purple);
+            color: var(--bg-gradient-start);
+            border: 2px solid var(--primary-purple);
+        }
+        .primary-btn:hover {
+            background-color: #FF99FF; 
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204, 102, 255, 0.7); 
+        }
+        .secondary-btn {
+            background: transparent;
+            border: 2px solid var(--secondary-blue);
+            color: var(--secondary-blue);
+        }
+        .secondary-btn:hover {
+            background-color: var(--secondary-blue);
+            color: var(--bg-gradient-start);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 204, 255, 0.8);
+        }
+        .large-btn { padding: 15px 40px; font-size: 1.2em; }
+
+        /* --- Features Section (Block Styling) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 5px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid var(--secondary-blue);
+            box-shadow: 5px 5px 0px var(--secondary-blue); 
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 8px 8px 0px var(--secondary-blue);
+        }
+        .feature-card .icon {
+            font-size: 3em;
+            display: block;
+            margin-bottom: 15px;
+        }
+        .feature-card h3 { 
+            color: var(--primary-purple); 
+            margin-bottom: 10px;
+        }
+        .card-btn {
+            margin-top: 20px;
+            padding: 8px 20px;
+            border-radius: var(--border-radius-sharp);
+            background-color: var(--primary-purple);
+            color: var(--bg-gradient-start);
+            font-size: 0.9em;
+        }
+        .card-btn:hover {
+            background-color: #FF99FF;
+            transform: scale(1.05);
+        }
+
+        /* --- Testimonials Section --- */
+        .testimonials-section { background-color: var(--bg-gradient-end); }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding-bottom: 60px;
+        }
+        .testimonial-card {
+            background-color: var(--bg-gradient-start);
+            border-radius: 5px;
+            padding: 25px;
+            font-style: italic;
+            border: 1px solid var(--primary-purple);
+        }
+        .testimonial-card .stars { 
+            color: #FFD700; 
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            font-style: normal;
+        }
+        .testimonial-card .author {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--secondary-blue);
+            font-style: normal;
+            text-align: right;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 80px 0;
+            border-top: 5px solid var(--primary-purple);
+        }
+        .cta-section h2 { padding-top: 0; margin-bottom: 10px; }
+        .cta-section p { margin-bottom: 30px; }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9em;
+            background-color: #00000A;
+            border-top: 1px solid var(--secondary-blue);
+        }
+
+        /* --- Chat Bubble --- */
+        #chat-bubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-purple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--primary-purple);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #chat-bubble:hover {
+            background-color: #FF99FF;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-content">
+            <div class="logo">🚗 CarBot</div>
+            <nav>
+                <a href="#" class="nav-item active">Home</a>
+                <a href="#" class="nav-item">Features</a>
+                <a href="#" class="nav-item highlight">Dashboard</a>
+                <a href="#" class="nav-item">My Cars</a>
+                <a href="#" class="nav-item">Products</a>
+                <a href="#" class="nav-item">Workshops</a>
+            </nav>
+            <a href="#" class="login-btn">Login</a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <video autoplay muted loop class="video-background">
+            <source src="your_car_video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="video-overlay"></div>
+
+        <div class="container hero-content">
+            <h1 class="glow-text">CarBot</h1>
+            <h2>Smart Auto Assistant for the Future of Driving</h2>
+            <div class="hero-buttons">
+                <button class="btn primary-btn">Go to Dashboard</button>
+                <button class="btn secondary-btn">Explore Features</button>
+            </div>
+        </div>
+    </section>
+
+    <section style="text-align: center; padding: 50px 0; background-color: var(--card-bg);">
+        <p style="font-style: italic; font-size: 1.2em; color: var(--secondary-blue);">
+            "Cars aren't just machines, they're freedom. CarBot keeps yours alive and well."
+        </p>
+    </section>
+
+
+    <section class="features-section">
+        <div class="container">
+            <h2>Our Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">🔍</span>
+                    <h3>Engine Prediction</h3>
+                    <p>AI diagnostics to detect engine issues early and avoid costly repairs.</p>
+                    <button class="btn card-btn">Try Now</button>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🛠️</span>
+                    <h3>Nearest Workshop</h3>
+                    <p>Live workshop locator with distance, reviews, and instant navigation.</p>
+                    <button class="btn card-btn">Find Workshops</button>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🚘</span>
+                    <h3>Car Management</h3>
+                    <p>Keep track of all your vehicles in one place with our easy-to-use interface.</p>
+                    <button class="btn card-btn">Manage Cars</button>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">💬</span>
+                    <h3>Chatbot Assistant</h3>
+                    <p>24/7 smart assistant for all your car-related queries.</p>
+                    <button class="btn card-btn">Chat Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"CarBot alerted me about a coolant leak before it overheated. Amazing!"</p>
+                    <p class="author">— Ravi T.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"I booked a garage in 3 taps. Saved time and stress!"</p>
+                    <p class="author">— Amrita S.</p>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The dashboard feature helps me track all my cars in one place. So convenient!"</p>
+                    <p class="author">— Leo K.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Experience CarBot?</h2>
+            <p>Get started with our dashboard and see how we can help you manage your vehicle's health.</p>
+            <button class="btn primary-btn large-btn">Go to Dashboard</button>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="margin-bottom: 10px; font-size: 1.5em;">🚗 CarBot</div>
+            <nav style="display: flex; justify-content: center; margin-bottom: 10px;">
+                <a href="#" class="nav-item" style="margin: 0 10px;">Home</a>
+                <a href="#" class="nav-item" style="margin: 0 10px;">Features</a>
+                <a href="#" class="nav-item" style="margin: 0 10px;">Dashboard</a>
+                <a href="#" class="nav-item" style="margin: 0 10px;">My Cars</a>
+                <a href="#" class="nav-item" style="margin: 0 10px;">Workshops</a>
+            </nav>
+            <p style="font-weight: 300;">© 2025 CarBot. Built for the future of driving.</p>
+        </div>
+    </footer>
+
+    <div id="chat-bubble">💬</div>
+
+    <script>
+        // Minimal JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBubble = document.getElementById('chat-bubble');
+            
+            // Simple alert to simulate opening a chatbot
+            chatBubble.addEventListener('click', () => {
+                alert("Chatbot Assistant Activated! How can I help with your car queries?");
+            });
+        });
+    </script>
+</body>
+</html>
